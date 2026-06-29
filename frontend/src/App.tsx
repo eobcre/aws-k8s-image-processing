@@ -1,57 +1,26 @@
-import { useState } from "react";
 import ImageOutlineIcon from "@iconify-react/material-symbols/image-outline";
 
 const App = () => {
-  const [file, setFile] = useState<File | null>(null);
-
-  const onUpload = async (selectedFile: File) => {
-    try {
-      const formData = new FormData();
-      formData.append("file", selectedFile);
-
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/upload`, {
-        method: "POST",
-        body: formData,
-      });
-
-      // console.log("Uploaded to S3!!!");
-
-      if (!res.ok) {
-        throw new Error("Upload failed");
-      }
-
-      const text = await res.text();
-      console.log(text);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   return (
-    <div className="flex flex-col justify-center items-center min-h-screen">
-      <div className="bg-white text-center border-2 border-dashed border-gray-300 rounded-2xl shadow-sm p-6 w-full max-w-md">
-        <div className="flex flex-col justify-center items-center gap-3">
-          <div className="flex justify-center items-center bg-gray-100 rounded-full w-14 h-14">
-            <ImageOutlineIcon className="text-gray-600 w-8" />
+    <div className="flex justify-center items-center bg-linear-to-br from-stone-100 via-rose-50 to-orange-100 px-4 py-10 min-h-screen">
+      <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-10 w-full max-w-5xl ">
+        <div className="bg-white/80 backdrop-blur-md rounded-3xl shadow-xl border border-white p-8">
+          <div className="mb-8">
+            <p className="text-xs font-semibold tracking-[0.3em] text-rose-400 uppercase">AI Caption Studio</p>
+            <h1 className="text-3xl font-bold text-gray-900 mt-3">Turn your photo into a caption-ready post.</h1>
+            <p className="text-sm text-gray-500 leading-6 mt-3">Upload an image and let AI generate a caption and hashtags for your post.</p>
           </div>
-          <div>
-            <p className="text-sm font-medium text-gray-700">Upload your image</p>
-            <p className="text-xs text-gray-500 mt-1">PNG, JPG, or JPEG up to 5MB</p>
-          </div>
-          <label className="bg-black hover:bg-gray-800 text-white text-sm font-medium rounded-lg cursor-pointer mt-3 px-4 py-2">
-            Choose File
-            <input
-              type="file"
-              accept="image/png, image/jpeg"
-              className="hidden"
-              onChange={async (e) => {
-                const selectedFile = e.target.files?.[0];
-                if (!selectedFile) return;
-                setFile(selectedFile);
-                await onUpload(selectedFile);
-              }}
-            />
+
+          <label className="group flex flex-col justify-center items-center border-2 border-dashed border-rose-200 hover:border-rose-400 bg-rose-50/60 hover:bg-rose-50 rounded-3xl cursor-pointer transition-all p-10">
+            <div className="bg-white shadow-sm flex justify-center items-center rounded-full group-hover:scale-105 transition-transform mb-4 w-16 h-16 ">
+              <ImageOutlineIcon className="text-rose-400 w-9 h-9" />
+            </div>
+
+            <p className="text-sm font-semibold text-gray-800">Choose an image</p>
+            <p className="text-xs text-gray-500 mt-2">PNG, JPG, JPEG up to 5MB</p>
           </label>
+
+          <div className="bg-white border text-sm text-gray-500 rounded-2xl mt-6 p-4">Generating AI caption...</div>
         </div>
       </div>
     </div>
