@@ -1,6 +1,18 @@
 import ImageOutlineIcon from "@iconify-react/material-symbols/image-outline";
 
-const Uploader = () => {
+type UploadProps = {
+  onUpload: (selectedFile: File) => Promise<void>;
+};
+
+const Uploader = ({ onUpload }: UploadProps) => {
+  const onChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = e.target.files?.[0];
+    if (!selectedFile) return;
+
+    await onUpload(selectedFile);
+    e.target.value = "";
+  };
+
   return (
     <div className="bg-white/80 backdrop-blur-md rounded-3xl shadow-xl border border-white p-8">
       <div className="mb-8">
@@ -16,6 +28,8 @@ const Uploader = () => {
 
         <p className="text-sm font-semibold text-gray-800">Choose an image</p>
         <p className="text-xs text-gray-500 mt-2">PNG, JPG, JPEG up to 5MB</p>
+
+        <input type="file" className="hidden" accept="image/png, image/jpeg" onChange={onChange} />
       </label>
 
       <div className="bg-white border text-sm text-gray-500 rounded-2xl mt-6 p-4">Generating AI caption...</div>
