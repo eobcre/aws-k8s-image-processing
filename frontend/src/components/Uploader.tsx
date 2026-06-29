@@ -39,7 +39,7 @@ const Uploader = ({ onUpload }: UploadProps) => {
         <input type="file" className="hidden" accept="image/png, image/jpeg" onChange={onChange} />
       </label>
 
-      <div className="bg-white border text-sm text-gray-500 rounded-2xl mt-6 p-4">Generating AI caption...</div>
+      <div className="bg-white text-sm text-gray-500 rounded-2xl mt-6 py-4">Generating AI caption...</div>
     </div>
   );
 };
