@@ -6,10 +6,17 @@ type UploadProps = {
 
 const Uploader = ({ onUpload }: UploadProps) => {
   const onChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    // access to file list - file
     const selectedFile = e.target.files?.[0];
+    // console.log("e.target.files", e.target.files);
+    // console.log("selectedFile:", selectedFile);
+
+    // validation
     if (!selectedFile) return;
 
     await onUpload(selectedFile);
+
+    // reset
     e.target.value = "";
   };
 
