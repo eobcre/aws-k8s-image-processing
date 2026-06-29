@@ -4,6 +4,8 @@ const App = () => {
   return (
     <div className="flex justify-center items-center bg-linear-to-br from-stone-100 via-rose-50 to-orange-100 px-4 py-10 min-h-screen">
       <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-10 w-full max-w-5xl ">
+
+        {/* left */}
         <div className="bg-white/80 backdrop-blur-md rounded-3xl shadow-xl border border-white p-8">
           <div className="mb-8">
             <p className="text-xs font-semibold tracking-[0.3em] text-rose-400 uppercase">AI Caption Studio</p>
@@ -21,6 +23,18 @@ const App = () => {
           </label>
 
           <div className="bg-white border text-sm text-gray-500 rounded-2xl mt-6 p-4">Generating AI caption...</div>
+        </div>
+
+        {/* right */}
+        <div className="flex justify-center">
+          <div className="bg-white rounded-4xl shadow-xl -rotate-2 opacity-80 p-5 w-full max-w-sm ">
+            <div className="flex justify-center items-center bg-linear-to-br from-gray-100 to-gray-200 rounded-2xl aspect-square">
+              <ImageOutlineIcon className="text-gray-300 w-16 h-16" />
+            </div>
+            <div className="text-center pt-6 pb-4 ">
+              <p className="text-sm text-gray-400">Your polaroid photo will appear here.</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
