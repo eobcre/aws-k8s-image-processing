@@ -11,7 +11,9 @@ const App = () => {
   // upload
   const onUpload = async (selectedFile: File) => {
     try {
+      // send request for file
       const formData = new FormData();
+      // add file details
       formData.append("file", selectedFile);
 
       const res = await fetch(`${import.meta.env.VITE_API_URL}/upload`, {
@@ -19,12 +21,15 @@ const App = () => {
         body: formData,
       });
 
+      // validation
       if (!res.ok) {
         throw new Error("Upload failed...");
       }
 
+      // get data
       const data = await res.json();
 
+      // save in state to display
       setUploadedImage({
         name: selectedFile.name,
         key: data.key,
