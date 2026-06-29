@@ -1,6 +1,11 @@
+import type { UploadedImage } from "../type";
 import ImageOutlineIcon from "@iconify-react/material-symbols/image-outline";
 
-const Polaroid = () => {
+type PolaroidProps = {
+  uploadedImage: UploadedImage | null;
+};
+
+const Polaroid = ({ uploadedImage }: PolaroidProps) => {
   return (
     <div className="flex justify-center">
       <div className="bg-white rounded-4xl shadow-xl -rotate-2 opacity-80 p-5 w-full max-w-sm ">
