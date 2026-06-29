@@ -23,12 +23,12 @@ const Polaroid = ({ uploadedImage }: PolaroidProps) => {
 
   return (
     <div className="flex justify-center">
-      <div className="bg-white rounded-[2rem] shadow-2xl p-5 w-full max-w-sm rotate-[-2deg]">
+      <div className="bg-white rounded-4xl shadow-2xl -rotate-2 p-5 w-full max-w-sm">
         <div className="bg-gray-100 rounded-2xl overflow-hidden aspect-square">
-          <img src={uploadedImage.imageUrl} alt={uploadedImage.name} className="w-full h-full object-cover" />
+          <img src={uploadedImage.imageUrl} alt={uploadedImage.name} className="object-cover w-full h-full" />
         </div>
 
-        <div className="pt-5 pb-3 px-2">
+        <div className="px-2 pt-5 pb-3">
           <div className="flex justify-between items-center text-xs text-gray-400 mb-3">
             <span>{uploadedImage.name}</span>
             <span>{uploadedImage.uploadedAt}</span>
@@ -38,13 +38,13 @@ const Polaroid = ({ uploadedImage }: PolaroidProps) => {
 
           <div className="flex flex-wrap gap-2 mt-4">
             {uploadedImage.tags.map((tag) => (
-              <span key={tag} className="text-xs bg-rose-50 text-rose-500 px-3 py-1 rounded-full">
+              <span key={tag} className="bg-rose-50 text-xs text-rose-500 rounded-full px-3 py-1">
                 #{tag}
               </span>
             ))}
           </div>
 
-          <div className="mt-5 pt-4 border-t flex justify-between text-xs text-gray-400">
+          <div className="flex justify-between text-xs text-gray-400 border-t mt-5 pt-4">
             <span>{uploadedImage.size}</span>
             <span>AI Generated</span>
           </div>
