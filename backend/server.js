@@ -47,7 +47,7 @@ app.post("/upload", upload.single("file"), async (req, res) => {
 
     res.json({
       message: "Uploaded successfully!!!",
-      key: fileKey,
+      // imageUrl,
     });
   } catch (error) {
     console.error("Upload error:", error);
