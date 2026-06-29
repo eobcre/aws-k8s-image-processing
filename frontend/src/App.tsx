@@ -29,10 +29,16 @@ const App = () => {
       // get data
       const data = await res.json();
 
+      const previewUrl = URL.createObjectURL(selectedFile);
+
+      // console.log("data:", data);
+
       // save in state to display
       setUploadedImage({
         name: selectedFile.name,
         key: data.key,
+        imageUrl: data.imageUrl || previewUrl,
+        // imageUrl: data.imageUrl,
         size: "5MB",
         uploadedAt: "10:30 PM",
         caption: "I had so much fun today!",
