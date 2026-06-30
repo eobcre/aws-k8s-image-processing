@@ -20,7 +20,7 @@ const App = () => {
       // add file details
       formData.append("file", selectedFile);
 
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/upload`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/upload`, {
         method: "POST",
         body: formData,
       });
@@ -38,7 +38,7 @@ const App = () => {
       // console.log("data:", data);
 
       // * * * caption and tags generate api
-      const resGenerate = await fetch(`${import.meta.env.VITE_API_URL}/generate`, {
+      const resGenerate = await fetch(`${import.meta.env.VITE_API_URL}/api/generate`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
