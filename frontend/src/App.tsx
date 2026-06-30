@@ -49,6 +49,7 @@ const App = () => {
       });
 
       const dataGenerate = await resGenerate.json();
+      // console.log("dataGenerate:", dataGenerate);
 
       // save in state to display
       setUploadedImage({
@@ -56,9 +57,12 @@ const App = () => {
         key: data.key,
         imageUrl: data.imageUrl || previewUrl,
         // imageUrl: data.imageUrl,
-        size: selectedFile.size,
-        uploadedAt: selectedFile.lastModified,
-        caption:  dataGenerate.caption ?? "I had so much fun today!",
+        size: `${(selectedFile.size / 1024 / 1024).toFixed(2)} MB`,
+        uploadedAt: new Date().toLocaleTimeString("en-US", {
+          hour: "numeric",
+          minute: "2-digit",
+        }),
+        caption: dataGenerate.caption ?? "I had so much fun today!",
         tags: dataGenerate.tags ?? ["summer", "beach", "vacation"],
       });
     } catch (error) {
