@@ -2,8 +2,8 @@ export type UploadedImage = {
   name: string;
   key: string;
   imageUrl: string;
-  size: string;
-  uploadedAt: string;
+  size: number;
+  uploadedAt: number;
   caption: string;
   tags: string[];
 };
