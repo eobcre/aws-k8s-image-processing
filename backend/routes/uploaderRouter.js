@@ -7,12 +7,10 @@ const router = express.Router();
 // multer
 const upload = multer({ storage: multer.memoryStorage() });
 
-// s3
 const s3 = new S3Client({
   region: process.env.AWS_REGION,
 });
 
-// * * * upload api
 router.post("/upload", upload.single("file"), async (req, res) => {
   try {
     // validation
