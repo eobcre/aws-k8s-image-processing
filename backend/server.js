@@ -1,8 +1,6 @@
 import express from "express";
 import cors from "cors";
-import multer from "multer";
 import dotenv from "dotenv";
-import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 
 import uploadRouter from "./routes/uploaderRouter.js";
 import generateRouter from "./routes/generateRouter.js";
@@ -25,7 +23,7 @@ const PORT = process.env.PORT;
 app.use("/api", uploadRouter);
 app.use("/api", generateRouter);
 
-// * * * server
+// server
 app.listen(PORT, () => {
   console.log("Server is running on port", PORT);
 });
