@@ -26,7 +26,7 @@ const s3 = new S3Client({
   region: process.env.AWS_REGION,
 });
 
-// upload api
+// * * * upload api
 app.post("/upload", upload.single("file"), async (req, res) => {
   try {
     // validation
@@ -47,7 +47,7 @@ app.post("/upload", upload.single("file"), async (req, res) => {
 
     res.json({
       message: "Uploaded successfully!!!",
-      // imageUrl,
+      key: fileKey,
     });
   } catch (error) {
     console.error("Upload error:", error);
@@ -55,6 +55,27 @@ app.post("/upload", upload.single("file"), async (req, res) => {
   }
 });
 
+// * * * generate api
+app.post("/generate", async (req, res) => {
+  try {
+    const { key } = req.body;
+    console.log("req.body:", req.body);
+
+    if (!key) {
+      return res.status(400).json({ error: "Image key is required..." });
+    }
+
+    res.json({
+      caption: "Spent the day at the beach and loved every moment.",
+      tags: ["summer", "beach", "vacation"],
+    });
+  } catch (error) {
+    console.error("Generate error...", error);
+    res.status(500).json({ error: "Failed to generate..." });
+  }
+});
+
+// * * * server
 app.listen(PORT, () => {
   console.log("Server is running on port", PORT);
 });
