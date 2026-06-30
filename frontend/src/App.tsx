@@ -9,11 +9,11 @@ const App = () => {
   const [uploadedImage, setUploadedImage] = useState<UploadedImage | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
 
-  const loadingMessages = ["Uploading image...", "Analyzing image...", "Generating AI caption...", "Creating hashtags...", "Finalizing results..."];
-
   // upload
   const onUpload = async (selectedFile: File) => {
     try {
+      setIsGenerating(true);
+
       // * * * s3 upload api
       // send request for file
       const formData = new FormData();
@@ -67,6 +67,8 @@ const App = () => {
       });
     } catch (error) {
       console.error(error);
+    } finally {
+      setIsGenerating(false);
     }
   };
 
@@ -74,7 +76,7 @@ const App = () => {
     <div className="flex justify-center items-center bg-linear-to-br from-stone-100 via-rose-50 to-orange-100 px-4 py-10 min-h-screen">
       <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-10 w-full max-w-5xl ">
         {/* left */}
-        <Uploader onUpload={onUpload} isGenerating={isGenerating} loadingMessages={loadingMessages} />
+        <Uploader onUpload={onUpload} isGenerating={isGenerating} />
         {/* right */}
         <Polaroid uploadedImage={uploadedImage} />
       </div>

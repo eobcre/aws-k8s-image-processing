@@ -3,10 +3,9 @@ import ImageOutlineIcon from "@iconify-react/material-symbols/image-outline";
 type UploadProps = {
   onUpload: (selectedFile: File) => Promise<void>;
   isGenerating: boolean;
-  loadingMessages: string[];
 };
 
-const Uploader = ({ onUpload, isGenerating, loadingMessages }: UploadProps) => {
+const Uploader = ({ onUpload, isGenerating }: UploadProps) => {
   const onChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     // access to file list - file
     const selectedFile = e.target.files?.[0];
@@ -41,7 +40,10 @@ const Uploader = ({ onUpload, isGenerating, loadingMessages }: UploadProps) => {
       </label>
 
       {isGenerating ? (
-        <div className="bg-white text-sm text-gray-500 rounded-2xl mt-6 py-4">{loadingMessages}</div>
+        <div className="flex items-center gap-3 bg-white text-sm text-gray-500 rounded-2xl mt-6 py-4">
+          <div className="border-2 border-rose-300 border-t-rose-500 rounded-full animate-spin w-4 h-4" />
+          <span>Generating AI caption and tags...</span>
+        </div>
       ) : (
         <p className="text-sm text-gray-500 leading-6 mt-3">Upload an image and let AI generate a caption and hashtags for your post.</p>
       )}
