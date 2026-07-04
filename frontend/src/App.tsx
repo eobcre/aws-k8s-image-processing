@@ -8,6 +8,7 @@ import type { UploadedImage } from "./type";
 const App = () => {
   const [uploadedImage, setUploadedImage] = useState<UploadedImage | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
+  const [isError, setError] = useState("");
 
   // upload
   const onUpload = async (selectedFile: File) => {
@@ -67,6 +68,7 @@ const App = () => {
       });
     } catch (error) {
       console.error(error);
+      setError("Upload failed. Try again.");
     } finally {
       setIsGenerating(false);
     }
@@ -76,7 +78,7 @@ const App = () => {
     <div className="flex justify-center items-center bg-linear-to-br from-stone-100 via-rose-50 to-orange-100 px-4 py-10 min-h-screen">
       <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-10 w-full max-w-5xl ">
         {/* left */}
-        <Uploader onUpload={onUpload} isGenerating={isGenerating} />
+        <Uploader onUpload={onUpload} isGenerating={isGenerating} isError={isError} />
         {/* right */}
         <Polaroid uploadedImage={uploadedImage} />
       </div>

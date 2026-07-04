@@ -3,9 +3,10 @@ import ImageOutlineIcon from "@iconify-react/material-symbols/image-outline";
 type UploadProps = {
   onUpload: (selectedFile: File) => Promise<void>;
   isGenerating: boolean;
+  isError: string;
 };
 
-const Uploader = ({ onUpload, isGenerating }: UploadProps) => {
+const Uploader = ({ onUpload, isGenerating, isError }: UploadProps) => {
   const onChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     // access to file list - file
     const selectedFile = e.target.files?.[0];
@@ -38,6 +39,8 @@ const Uploader = ({ onUpload, isGenerating }: UploadProps) => {
 
         <input type="file" className="hidden" accept="image/png, image/jpeg" onChange={onChange} />
       </label>
+
+      {isError && <p className="text-sm text-red-500 pt-4">{isError}</p>}
 
       {isGenerating ? (
         <div className="flex items-center gap-3 bg-white text-sm text-gray-500 rounded-2xl mt-6 py-4">
