@@ -13,6 +13,10 @@ provider "aws" {
   region = var.aws_region
 }
 
+#################################
+# VPC
+#################################
+
 # create vpc
 resource "aws_vpc" "main" {
   cidr_block           = var.vpc_cidr
@@ -23,6 +27,11 @@ resource "aws_vpc" "main" {
     Name = "${var.project_name}-vpc"
   }
 }
+
+
+#################################
+# Public Subnets
+#################################
 
 # create public subnets
 resource "aws_subnet" "public" {
@@ -38,6 +47,10 @@ resource "aws_subnet" "public" {
   }
 }
 
+#################################
+# Internet Gateway
+#################################
+
 # create internet gateway
 resource "aws_internet_gateway" "main" {
   vpc_id = aws_vpc.main.id
@@ -46,6 +59,10 @@ resource "aws_internet_gateway" "main" {
     Name = "${var.project_name}-igw"
   }
 }
+
+#################################
+# Route Table
+#################################
 
 # create public route table
 resource "aws_route_table" "public" {
