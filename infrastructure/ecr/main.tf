@@ -1,3 +1,18 @@
+terraform {
+  backend "s3" {}
+
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 6.0"
+    }
+  }
+}
+
+provider "aws" {
+  region = var.aws_region
+}
+
 resource "aws_ecr_repository" "api" {
   name                 = "ai-caption-api"
   image_tag_mutability = "MUTABLE"
