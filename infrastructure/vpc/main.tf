@@ -13,6 +13,7 @@ provider "aws" {
   region = var.aws_region
 }
 
+# create vpc
 resource "aws_vpc" "main" {
   cidr_block           = var.vpc_cidr
   enable_dns_hostnames = true
@@ -23,6 +24,7 @@ resource "aws_vpc" "main" {
   }
 }
 
+# create public subnets
 resource "aws_subnet" "public" {
   count = 2
 
@@ -36,6 +38,7 @@ resource "aws_subnet" "public" {
   }
 }
 
+# create internet gateway
 resource "aws_internet_gateway" "main" {
   vpc_id = aws_vpc.main.id
 
@@ -44,6 +47,7 @@ resource "aws_internet_gateway" "main" {
   }
 }
 
+# create public route table
 resource "aws_route_table" "public" {
   vpc_id = aws_vpc.main.id
 
@@ -57,6 +61,7 @@ resource "aws_route_table" "public" {
   }
 }
 
+# associte route table with public subnets
 resource "aws_route_table_association" "public" {
   count = 2
 
