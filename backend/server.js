@@ -29,5 +29,5 @@ app.listen(PORT, () => {
 });
 
 app.get("/", (req, res) => {
-  res.send("Backend API is running");
+  res.send("Backend API is running and test");
 });
