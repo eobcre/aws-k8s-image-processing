@@ -1,4 +1,4 @@
-name: Backend Docker Deploy
+name: Backend Deploy
 
 on:
   push:
@@ -25,5 +25,20 @@ jobs:
         working-directory: backend
         run: |
           docker build -t ai-caption-api .
-          docker tag ai-caption-api:latest ${{ secrets.ECR_REPOSITORY_URL }}:latest
-          docker push ${{ secrets.ECR_REPOSITORY_URL }}:latest
+          docker tag ai-caption-api:latest ${{ secrets.ECR_REPOSITORY_URL }}:${{ github.sha }}
+          docker push ${{ secrets.ECR_REPOSITORY_URL }}:${{ github.sha }}
+      
+      - name: Update kubeconfig
+        run: |
+          aws eks update-kubeconfig \
+            --region ${{ secrets.AWS_REGION }} \
+            --name ${{ secrets.EKS_CLUSTER_NAME }}
+
+      - name: Update EKS deployment
+        run: |
+          kubectl set image deployment/backend \
+            backend=${{ secrets.ECR_REPOSITORY_URL }}:${{ github.sha }}
+
+      - name: Check rollout status
+        run: |
+          kubectl rollout status deployment/backend
