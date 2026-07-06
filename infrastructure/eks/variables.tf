@@ -8,7 +8,10 @@ variable "cluster_name" {
   type        = string
 }
 
-variable "subnet_ids" {
-  description = "Subnet IDs for EKS"
-  type        = list(string)
+variable "tf_state_bucket" {
+  type = string
+}
+
+variable "vpc_state_key" {
+  type = string
 }
