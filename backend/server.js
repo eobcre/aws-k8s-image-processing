@@ -27,3 +27,7 @@ app.use("/api", generateRouter);
 app.listen(PORT, () => {
   console.log("Server is running on port", PORT);
 });
+
+app.get("/", (req, res) => {
+  res.send("Backend API is running");
+});
