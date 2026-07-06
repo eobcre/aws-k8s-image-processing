@@ -22,7 +22,7 @@ jobs:
       - uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-region: ${{ secrets.AWS_REGION }}
-          role-to-assume: ${{ secrets.AWS_EKS_ROLE_ARN }}
+          role-to-assume: ${{ secrets.AWS_EKS_BACKEND_ROLE_ARN }}
 
       - uses: aws-actions/amazon-ecr-login@v2
 
