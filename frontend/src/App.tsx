@@ -21,7 +21,8 @@ const App = () => {
       // add file details
       formData.append("file", selectedFile);
 
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/upload`, {
+        const res = await fetch(`${import.meta.env.VITE_BASE_API_URL}/api/upload`, {
+        // const res = await fetch(`${import.meta.env.VITE_API_URL}/api/upload`, {
         method: "POST",
         body: formData,
       });
