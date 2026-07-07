@@ -37,6 +37,12 @@ spec:
                   name: backend-secret-url
                   key: BASE_URL
 
+            - name: AWS_REGION
+              valueFrom:
+                secretKeyRef:
+                  name: backend-secret-region
+                  key: AWS_REGION
+
             - name: S3_BUCKET_NAME
               valueFrom:
                 secretKeyRef:
