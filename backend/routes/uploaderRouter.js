@@ -1,6 +1,7 @@
 import express from "express";
 import multer from "multer";
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
+import { fromTokenFile } from "@aws-sdk/credential-providers";
 
 const router = express.Router();
 
@@ -9,6 +10,7 @@ const upload = multer({ storage: multer.memoryStorage() });
 
 const s3 = new S3Client({
   region: process.env.AWS_REGION,
+  credentials: fromTokenFile(),
 });
 
 router.post("/upload", upload.single("file"), async (req, res) => {
