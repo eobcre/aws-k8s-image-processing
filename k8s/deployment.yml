@@ -26,4 +26,22 @@ spec:
 
           env:
             - name: PORT
-              value: "5000"
+              valueFrom:
+              secretKeyRef:
+              name: backend-secret
+              key: PORT
+            - name: BASE_URL
+              valueFrom:
+              secretKeyRef:
+              name: backend-secret-url
+              key: BASE_URL
+            - name: S3_BUCKET_NAME
+              valueFrom:
+              secretKeyRef:
+              name: backend-secret-bucket
+              key: S3_BUCKET_NAME
+            - name: MODEL_ID
+              valueFrom:
+              secretKeyRef:
+              name: backend-secret-model
+              key: MODEL_ID
