@@ -32,8 +32,7 @@ jobs:
       - name: Build and push Docker image
         working-directory: backend
         run: |
-          docker build -t ai-caption-api .
-          docker tag ai-caption-api:latest ${{ secrets.ECR_REPOSITORY_URL }}:${{ github.sha }}
+          docker build -t ${{ secrets.ECR_REPOSITORY_URL }}:${{ github.sha }} .
           docker push ${{ secrets.ECR_REPOSITORY_URL }}:${{ github.sha }}
 
       # connect kubectl to eks cluster
