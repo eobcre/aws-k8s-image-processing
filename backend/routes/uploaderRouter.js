@@ -17,8 +17,15 @@ router.post("/upload", upload.single("file"), async (req, res) => {
     if (!req.file) {
       return res.status(400).json({ error: "No file uploaded..." });
     }
+
+    console.log("File name:", req.file.originalname);
+    console.log("Bucket:", process.env.S3_BUCKET_NAME);
+    console.log("Region:", process.env.AWS_REGION);
+
     // file name
     const fileKey = `uploads-${Date.now()}-${req.file.originalname}`;
+
+    console.log("Uploading to S3...");
 
     await s3.send(
       new PutObjectCommand({
@@ -28,6 +35,8 @@ router.post("/upload", upload.single("file"), async (req, res) => {
         ContentType: req.file.mimetype,
       }),
     );
+
+    console.log("Upload succeeded.");
 
     res.json({
       message: "Uploaded successfully!!!",
