@@ -11,7 +11,9 @@ const app = express();
 
 app.use(
   cors({
+    // prod
     origin: process.env.BASE_URL,
+    // local
     // origin: process.env.CLIENT_URL,
     methods: ["GET", "POST", "OPTIONS"],
   }),
