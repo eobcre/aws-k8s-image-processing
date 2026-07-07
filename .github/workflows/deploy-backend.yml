@@ -19,31 +19,37 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # authenticate to aws using oidc
       - uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-region: ${{ secrets.AWS_REGION }}
           role-to-assume: ${{ secrets.AWS_EKS_BACKEND_ROLE_ARN }}
 
+      # login to ecr
       - uses: aws-actions/amazon-ecr-login@v2
 
+      # build docker image and push to ecr using commit sha
       - name: Build and push Docker image
         working-directory: backend
         run: |
           docker build -t ai-caption-api .
           docker tag ai-caption-api:latest ${{ secrets.ECR_REPOSITORY_URL }}:${{ github.sha }}
           docker push ${{ secrets.ECR_REPOSITORY_URL }}:${{ github.sha }}
-      
+
+      # connect kubectl to eks cluster
       - name: Update kubeconfig
         run: |
           aws eks update-kubeconfig \
             --region ${{ secrets.AWS_REGION }} \
             --name ${{ secrets.EKS_CLUSTER_NAME }}
 
+      # update deployment image with new commit sha
       - name: Update EKS deployment
         run: |
-          kubectl set image deployment/backend \
-            backend=${{ secrets.ECR_REPOSITORY_URL }}:${{ github.sha }}
+          sed -i "s|IMAGE_PLACEHOLDER|${{ secrets.ECR_REPOSITORY_URL }}:${{ github.sha }}|g" k8s/deployment.yml
+          kubectl apply -f k8s/deployment.yml
 
+      # wait until rolling update completes
       - name: Check rollout status
         run: |
           kubectl rollout status deployment/backend
