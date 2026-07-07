@@ -40,7 +40,7 @@ const App = () => {
       // console.log("data:", data);
 
       // * * * caption and tags generate api
-      const resGenerate = await fetch(`${import.meta.env.VITE_API_URL}/api/generate`, {
+      const resGenerate = await fetch(`${import.meta.env.VITE_BASE_API_URL}/api/generate`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
