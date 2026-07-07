@@ -17,6 +17,7 @@ spec:
         app: backend
 
     spec:
+      serviceAccountName: backend-service-account
       containers:
         - name: backend
           image: IMAGE_PLACEHOLDER
