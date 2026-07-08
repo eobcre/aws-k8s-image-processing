@@ -4,7 +4,7 @@ AI Caption Studio is a full-stack web application that allows users to upload im
 
 ## 🧠 How It Works
 
-1. User uploads an image　from the browser.
+1. User uploads an image from the browser.
 2. Frontend sends the image to the backend API using `FormData`.
 3. Backend uploads the image to S3 and returns the file key. (e.g. uploads-1234567-001.JPG)
 4. Frontend sends the file key to the AI generation endpoint.
