@@ -30,7 +30,7 @@ AI Caption Studio is a full-stack web application that allows users to upload im
   <br />
   <img src="./docs/architecture.png" alt="Image" width="600" />
   <br />
-  <sub>Architecture diagram created with Lucidchart</sub>
+  <sub>Architecture diagram created with Lucidchart by me</sub>
 </p>
 
 ## 🚀 Features
