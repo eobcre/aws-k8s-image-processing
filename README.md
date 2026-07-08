@@ -48,6 +48,7 @@ AI Caption Studio is a full-stack web application that allows users to upload im
 ### Frontend
 
 - React
+- JavaScript
 - TypeScript
 - Tailwind CSS
 
